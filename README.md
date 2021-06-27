@@ -1,16 +1,16 @@
 # SparkIOBLE
 
-Credit to Evgeniy Aslovskiy (copych/BLE_Spark_pedal on github) for showing how to get BLE incoporated into the SparkComms class.
+Credit to Evgeniy Aslovskiy (copych/BLE_Spark_pedal on github) for showing how to get BLE incoporated into the SparkComms class.   
 
 
-New version of SparkIO now using BLE (optional)
+New version of SparkIO now using BLE (optional)   
 
-Key differences from SparkIO:
+Key differences from SparkIO:   
 
-- There is no class for SparkComms - it is now just a library
-- You need to call start_bt with a boolean parament
-      start_bt(false)- false uses bluetooth serial
-      start_bt(true) - true uses BLE
+- There is no class for SparkComms - it is now just a library   
+- You need to call start_bt with a boolean parameter   
+      start_bt(false)- false uses bluetooth serial   
+      start_bt(true) - true uses BLE   
 
 
 
