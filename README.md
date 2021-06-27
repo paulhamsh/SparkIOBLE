@@ -36,7 +36,7 @@ void setup()
 
 
 ```
-To convert any existing code, remove the bold bits commented out below, and add a boolean parameter to start_bt()
+To convert any existing code, remove the bits commented out below, and add a boolean parameter to start_bt()
 
 ```
 SparkAppIO app_io(true);         // true in the parameter sends all messages from serial to the amp *via bt)  - passthru
