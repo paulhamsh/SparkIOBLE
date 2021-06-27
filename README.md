@@ -15,7 +15,7 @@ Key differences from SparkIO:
 
 
 ```
-SparkAppIO app_io(true);         // true in the parameter sends all messages from serial to the amp *via bt)  - passthru
+SparkAppIO app_io(true);         // true in the parameter sends all messages from serial to the amp (via bt)  - passthru
 SparkIO spark_io(true);          // true in the parameter sends all messages from the amp (via bt) to serial - passthru
 
 unsigned int cmdsub;
@@ -39,7 +39,7 @@ void setup()
 To convert any existing code, remove the bits commented out below, and add a boolean parameter to start_bt()
 
 ```
-SparkAppIO app_io(true);         // true in the parameter sends all messages from serial to the amp *via bt)  - passthru
+SparkAppIO app_io(true);         // true in the parameter sends all messages from serial to the amp (via bt)  - passthru
 SparkIO spark_io(true);          // true in the parameter sends all messages from the amp (via bt) to serial - passthru
 /* SparkComms spark_comms; */
 
