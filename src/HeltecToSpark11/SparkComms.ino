@@ -62,41 +62,45 @@ void connect_to_spark() {
       b = bt->read(); 
   }
   else {
-    NimBLEDevice::init("");
+    while (!connected) {
+      NimBLEDevice::init("");
   
-    NimBLEScan *pScan = NimBLEDevice::getScan();
-    NimBLEScanResults results = pScan->start(4);
+      NimBLEScan *pScan = NimBLEDevice::getScan();
+      NimBLEScanResults results = pScan->start(4);
 
-    NimBLEUUID serviceUuid("ffc0");               // service ffc0 for Spark
+      NimBLEUUID serviceUuid("ffc0");               // service ffc0 for Spark
 
-    for(i = 0; i < results.getCount() && !connected; i++) {
-      device = results.getDevice(i);
+      for(i = 0; i < results.getCount() && !connected; i++) {
+        device = results.getDevice(i);
     
-      if (device.isAdvertisingService(serviceUuid)) {
-        pClient = NimBLEDevice::createClient();
+        if (device.isAdvertisingService(serviceUuid)) {
+          pClient = NimBLEDevice::createClient();
         
-        if(pClient->connect(&device)) {
-          connected = true;
-          DEBUG("BLE Connected");
-        }
-      }
-    }
-
-    // Get the services
-  
-    if (connected) {
-      pService = pClient->getService(serviceUuid);
-                
-      if (pService != nullptr) {
-        pSender   = pService->getCharacteristic("ffc1");
-        pReceiver = pService->getCharacteristic("ffc2");
-        if (pReceiver && pReceiver->canNotify()) {
-          if (!pReceiver->subscribe(true, notifyCB, true)) {
-            connected = false;
-            pClient->disconnect();
+          if(pClient->connect(&device)) {
+            connected = true;
+            DEBUG("BLE Connected");
           }
         }
       }
+
+      // Get the services
+  
+      if (connected) {
+        pService = pClient->getService(serviceUuid);
+                
+        if (pService != nullptr) {
+          pSender   = pService->getCharacteristic("ffc1");
+          pReceiver = pService->getCharacteristic("ffc2");
+          if (pReceiver && pReceiver->canNotify()) {
+            if (!pReceiver->subscribe(true, notifyCB, true)) {
+              connected = false;
+              pClient->disconnect();
+            }
+          }
+        }
+      }
+      
+      if (!connected) DEBUG ("Not connected - trying again");
     }
   }
 }
